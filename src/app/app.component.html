@@ -1,3 +1,15 @@
+<p>{{ title }}</p>
+
+<img style="width: 150px;" [src]="img" alt="logo">
+<input 
+	type="text" 
+	(keyup.enter)="onInput($event)" 
+	(blur)="onBlur(myInput.value)"
+	#myInput
+/>
+<p><strong>{{inputValue}}</strong></p>
+
+
 <app-header></app-header>
 <app-main></app-main>
 <app-footer></app-footer>
