@@ -9,7 +9,7 @@ export class AppComponent {
 
   title = 'Dynamic title'
   img = 'https://banner2.cleanpng.com/20180720/zia/kisspng-react-javascript-library-web-development-vue-js-funding-icon-5b51604fbf7995.0841849115320597277843.jpg'
-  inputValue = ''
+  inputValue = 'initial'
 
   constructor() {
     setTimeout(() => {
