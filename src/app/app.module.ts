@@ -3,18 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { PostFormComponent } from './post-form/post-form.component';
 import { PostComponent } from './post/post.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent
+    PostFormComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -22,11 +18,7 @@ import { MainComponent } from './main/main.component';
   ],
   providers: [],
   bootstrap: [
-    AppComponent, 
-    PostComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent
+    AppComponent
   ]
 })
 export class AppModule { }

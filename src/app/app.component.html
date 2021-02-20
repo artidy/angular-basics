@@ -1,2 +1,12 @@
-<h1>{{ title }}</h1>
-<p>{{now | date:'long' }}</p>
+<div class="container">
+	<h1>Angular Components</h1>
+
+	<app-post-form></app-post-form>
+
+	<hr>
+
+	<app-post 
+		*ngFor="let post of posts"
+		[post]="post"
+	></app-post>
+</div>
