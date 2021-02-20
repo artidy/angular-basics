@@ -10,5 +10,20 @@
 	<app-post 
 		*ngFor="let post of posts"
 		[post]="post"
-	></app-post>
+	>
+		<div #info>
+			<small *ngIf="post.text.length > 10; else short">Пост длинный</small>	
+			<ng-template #short>
+				<small>Пост короткий</small>	
+			</ng-template>
+		</div>
+	</app-post>
+
+	<p appStyle="red" [dStyles]="{border: '1px solid blue', borderRadius: '5px', fontWeight: 'bold'}">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, rem!</p>
+
+	<button class="btn" (click)="isVisible = !isVisible">Toggle</button>
+
+	<div *appIfnot="!isVisible" class="wrap">
+		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis et sit deleniti voluptas explicabo nisi ex molestiae laboriosam corrupti minus?</p>
+	</div>
 </div>
