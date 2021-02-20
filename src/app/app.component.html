@@ -13,3 +13,23 @@
 	<p *ngSwitchCase="false" class="blue">Lorem, ipsum dolor.</p>
 	<p *ngSwitchDefault>Lorem ipsum dolor sit.</p>
 </div>
+
+<ul>
+	<li *ngFor="let number of arr; let idx = index">
+		{{idx + 1}}
+		<strong>{{number}}</strong>
+	</li>
+</ul>
+
+<ul style="list-style: none;">
+	<li *ngFor="let post of objs; let idx = index">
+		{{idx + 1}}
+		<strong>{{post.title}}</strong>-<b>{{post.author}}</b>
+		<ul style="list-style: none;">
+			<li *ngFor="let comment of post.comments; let idxComment = index">
+				<p>{{idxComment + 1}}<strong>{{comment.text}}</strong></p>
+				<p><i>{{comment.name}}</i></p>
+			</li>
+		</ul>
+	</li>
+</ul>
