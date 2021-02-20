@@ -1,16 +1,11 @@
-<p>{{ title }}</p>
+<h1>{{ title }}</h1>
 
-<img style="width: 150px;" [src]="img" alt="logo">
-<input 
-	type="text" 
-	(keyup.enter)="onInput($event)" 
-	(blur)="onBlur(myInput.value)"
-	#myInput
-/>
-<input type="text" [(ngModel)]="inputValue">
-<p><strong>{{inputValue}}</strong></p>
+<button (click)="backgroundToggle = !backgroundToggle">Toggle</button>
 
-
-<app-header></app-header>
-<app-main></app-main>
-<app-footer></app-footer>
+<div [ngStyle]="{
+	width: '200px',
+	height: '200px',
+	borderRadius: '5px',
+	border: '5px solid #ccc',
+	background: backgroundToggle ? 'red' : 'blue'
+}"></div>
