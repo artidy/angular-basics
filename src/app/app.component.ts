@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Post {
   title: string,
-  text: string,
-  id?: number
+  text: string
 }
 
 @Component({
@@ -12,18 +12,15 @@ export interface Post {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  posts: Post[] = [
-    {title: 'Аляска', text: 'Самое лучшее пиво в мире'},
-    {title: 'Холупень', text: 'Самый лучший хлеб в мире'},
-    {title: 'JavaScript', text: 'Самый лучший язык программирования в мире'}
-  ]
-  search = ''
-
-  addPost() {
-    this.posts.unshift({
-      title: 'Today day',
-      text: 'Today day is perfect'
-    })
-  }
+  promise: Promise<string> = new Promise<string>(resolve => {
+    setTimeout(() => {
+      resolve('Promise resolved')
+    }, 5000)
+  })
+  date: Observable<Date> = new Observable(obs => {
+    setInterval(() => {
+      obs.next(new Date())
+    }, 1000)
+  })
   
 }
