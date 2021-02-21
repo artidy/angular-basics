@@ -12,14 +12,18 @@ export interface Post {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  isVisible = true
-  posts: Post[] = [
-    {title: 'Хочу выучить Angular компоненты.', text: 'Я все еще учу компоненты.', id: 1},
-    {title: 'Задание на завтра', text: 'Завтра надо будет написать еще больше кода.', id: 2}
-  ]
-
-  updatePosts(post: Post) {
-    this.posts.unshift(post)
-  }
+  e: number = Math.E
+  str = 'hello world'
+  date: Date = new Date()
+  float: number = 0.42
+  obj = {
+		a: 1,
+		b: {
+			c: 2,
+			d: {
+				e: 3,
+				f: 4
+			}
+		}
+	}
 }
