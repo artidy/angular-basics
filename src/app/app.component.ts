@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MyValidators } from './my.validators';
+import { Todo, TodosService } from './services/todos.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,53 +9,64 @@ import { MyValidators } from './my.validators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  form: FormGroup
-  appState = 'off'
+
+  todos: Todo[] = []
+  todoTitle = ''
+  loading = false
+  error = ''
+
+  constructor(private todoService: TodosService) {}
 
   ngOnInit() {
-    this.form = new FormGroup({
-      email: new FormControl('', [
-        Validators.email, 
-        Validators.required,
-        MyValidators.restrictedEmails
-      ], MyValidators.uniqEmail),
-      password: new FormControl(null, [
-        Validators.minLength(6),
-        Validators.required
-      ]),
-      address: new FormGroup({
-        country: new FormControl('ru'),
-        city: new FormControl('', Validators.required)
-      }),
-      skills: new FormArray([], {updateOn: 'blur'})
-    })
+    this.fetchTodos()
   }
 
-  submit() {
-    if (this.form.valid) {
-      console.log('Form submitted ', this.form)
-      const formData = {...this.form.value}
-      console.log(formData)
-      this.form.reset()
+  addTodo() {
+    if (this.todoTitle.trim()) {
+      const newTodo: Todo = {
+        title: this.todoTitle,
+        completed: false
+      }  
+      this.todoService.addTodo(newTodo)
+        .subscribe(
+          todo => {
+            this.todos.unshift(todo)
+            this.todoTitle = ''
+          },
+          error => this.error = `Ошибка: ${error.message}`
+        )
     }
   }
 
-  chooseCapital() {
-    const cityMap = {
-      ru: 'Москва',
-      ua: 'Киев',
-      by: 'Минск',  
-    } 
-    const city = cityMap[this.form.get('address').get('country').value] 
-    this.form.patchValue({address: {city}})
+  fetchTodos() {
+    this.loading = true
+      this.todoService.getTodos()
+      .subscribe(
+        todos => {
+          this.todos = todos
+          this.loading = false
+        },
+        error => this.error = `Ошибка: ${error.message}`
+      )
   }
 
-  addSkill() {
-    const control = new FormControl('', Validators.required);
-    (this.form.get('skills') as FormArray).push(control)
+  removeTodo(id: number) {
+    this.todoService.removeTodo(id)
+      .subscribe(
+        () => {
+          this.todos = this.todos.filter(item => item.id !== id)
+        },
+        error => this.error = `Ошибка: ${error.message}`
+      )
   }
 
-  getSkills() {
-    return (this.form.get('skills') as FormArray).controls     
+  completeTodo(id: number) {
+    this.todoService.completeTodo(id)
+      .subscribe(
+        todo => {
+          this.todos.find(item => item.id === todo.id).completed = true
+        },
+        error => this.error = `Ошибка: ${error.message}`
+      )  
   }
 }
