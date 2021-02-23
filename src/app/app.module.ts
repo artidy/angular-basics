@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import { ModalComponent } from './modal/modal.component';
+import { RefDirective } from './ref.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    ModalComponent,
+    RefDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
-    RouterModule,
-    SharedModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [
